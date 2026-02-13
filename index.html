@@ -113,9 +113,6 @@
         📋 Copy Address
       </button>
       <p style="margin-top:20px;">
-        🔥 Live Balance (SOL): <span id="oven-balance">Loading...</span>
-      </p>
-      <p style="margin-top:20px;">
         ⏳ Countdown ke 22 Mei: <span id="countdown"></span>
       </p>
       <p style="margin-top:20px;">
@@ -165,7 +162,6 @@
   </footer>
 
   <!-- SCRIPTS -->
-  <script src="https://unpkg.com/@solana/web3.js@1.88.0/lib/index.iife.min.js"></script>
   <script>
     // Copy address button
     function copyAddress() {
@@ -188,22 +184,6 @@
     }
     setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    // Live balance Solana (Oven wallet)
-    async function getOvenBalance() {
-      try {
-        const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
-        const publicKey = new solanaWeb3.PublicKey("4wxHqt63vKYNxcttMAUTHmTQsuZKZrviZm8qUcKL4wWK");
-        const balance = await connection.getBalance(publicKey);
-        const sol = balance / solanaWeb3.LAMPORTS_PER_SOL;
-        document.getElementById('oven-balance').innerText = sol.toFixed(4) + " SOL";
-      } catch (e) {
-        document.getElementById('oven-balance').innerText = "Error";
-        console.error(e);
-      }
-    }
-    getOvenBalance();
-    setInterval(getOvenBalance, 15000); // update tiap 15 detik
   </script>
 
 </body>
